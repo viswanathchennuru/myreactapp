@@ -1,44 +1,153 @@
-﻿.products {
+﻿* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body {
+  background: #f4f7fb;
+}
+
+.container {
+  max-width: 1300px;
+  margin: auto;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.tagline {
+  color: #2563eb;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-size: 4rem;
+  color: #111827;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 18px;
+  max-width: 800px;
+  margin: auto;
+  line-height: 1.6;
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 25px 0;
+  font-weight: 600;
+  flex-wrap: wrap;
+}
+
+.section-title {
+  margin: 40px 0 20px;
+  color: #111827;
+}
+
+.products {
   display: flex;
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-  margin-top: 30px;
 }
 
 .card {
-  width: 280px;
-  background: #fff;
-  border-radius: 15px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 340px;
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
 }
 
 .card img {
-  width: 120px;
-  height: 120px;
+  width: 180px;
+  height: 180px;
   object-fit: contain;
-  margin-bottom: 15px;
 }
 
 .card h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  font-size: 32px;
+  color: #111827;
+}
+
+.description {
+  margin-top: 15px;
+  color: #4b5563;
+  font-size: 18px;
+  line-height: 1.6;
+  min-height: 70px;
 }
 
 .price {
-  font-size: 22px;
-  font-weight: bold;
   color: #2563eb;
-  margin: 10px 0;
+  font-size: 34px;
+  margin: 20px 0;
 }
 
 button {
   background: #2563eb;
   color: white;
   border: none;
-  padding: 10px 18px;
+  padding: 12px 25px;
   border-radius: 8px;
+  font-size: 17px;
   cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.cart {
+  margin: 50px auto;
+  max-width: 700px;
+  background: white;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.cart h2 {
+  margin-bottom: 15px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.total {
+  margin-top: 20px;
+  font-size: 30px;
+  font-weight: bold;
+  color: green;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .card {
+    width: 95%;
+  }
+
+  .features {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

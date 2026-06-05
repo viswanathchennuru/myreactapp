@@ -1,7 +1,4 @@
 import { useState } from "react";
-import laptopImg from "./assets/laptop.svg";
-import mobileImg from "./assets/mobile.svg";
-import headphonesImg from "./assets/headphones.svg";
 import "./App.css";
 
 function App() {
@@ -10,22 +7,22 @@ function App() {
       id: 1,
       name: "Laptop",
       price: 50000,
-      image: laptopImg,
-      description: "High-performance laptop for creative workflows.",
+      description: "High-performance laptop for work and study.",
+      image: "https://cdn-icons-png.flaticon.com/512/689/689396.png",
     },
     {
       id: 2,
       name: "Mobile",
       price: 20000,
-      image: mobileImg,
       description: "Sleek smartphone with long-lasting battery.",
+      image: "https://cdn-icons-png.flaticon.com/512/15/15874.png",
     },
     {
       id: 3,
       name: "Headphones",
       price: 2000,
-      image: headphonesImg,
-      description: "Comfortable sound for music and calls.",
+      description: "Comfortable headphones for music and calls.",
+      image: "https://cdn-icons-png.flaticon.com/512/5977/5977590.png",
     },
   ];
 
@@ -38,76 +35,64 @@ function App() {
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
   return (
-    <div className="app-shell">
-      <header className="hero-panel">
-        <div className="hero-copy">
-          <span className="eyebrow">Premium shopping experience</span>
-          <h1>Smart Tech Store</h1>
-          <p>
-            Discover curated electronics with a polished look, fast checkout,
-            and a professional product showcase.
-          </p>
-        </div>
-        <div className="hero-cta">Fast delivery · Trusted quality · Easy returns</div>
-      </header>
+    <div className="container">
+      <p className="tagline">Premium Shopping Experience</p>
 
-      <main className="container">
-        <section className="section-header">
-          <div>
-            <p className="section-label">Featured products</p>
-            <h2>Shop the best tech items</h2>
+      <h1>Smart Tech Store</h1>
+
+      <p className="subtitle">
+        Discover curated electronics with a polished look, fast checkout,
+        and a professional product showcase.
+      </p>
+
+      <div className="features">
+        <span>🚚 Fast Delivery</span>
+        <span>🛡️ Trusted Quality</span>
+        <span>🔄 Easy Returns</span>
+      </div>
+
+      <h2 className="section-title">Featured Products</h2>
+
+      <div className="products">
+        {products.map((product) => (
+          <div className="card" key={product.id}>
+            <img src={product.image} alt={product.name} />
+
+            <h3>{product.name}</h3>
+
+            <p className="description">{product.description}</p>
+
+            <h2 className="price">
+              ₹{product.price.toLocaleString()}
+            </h2>
+
+            <button onClick={() => addToCart(product)}>
+              Add to Cart
+            </button>
           </div>
-          <p className="section-text">
-            Add the items you love to the cart and see the total update
-            instantly.
-          </p>
-        </section>
+        ))}
+      </div>
 
-        <div className="content-grid">
-          <div className="products">
-            {products.map((product) => (
-              <article className="card" key={product.id}>
-                <img src={product.image} alt={product.name} />
-                <div className="card-body">
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <div className="card-footer">
-                    <span>₹{product.price}</span>
-                    <button onClick={() => addToCart(product)}>
-                      Add to Cart
-                    </button>
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
+      <div className="cart">
+        <h2>🛒 Cart Summary</h2>
 
-          <aside className="cart-panel">
-            <div className="cart-header">
-              <h2>Cart Summary</h2>
-              <span>{cart.length} item(s)</span>
+        <p>{cart.length} Item(s)</p>
+
+        {cart.length === 0 ? (
+          <p>Your cart is empty.</p>
+        ) : (
+          cart.map((item, index) => (
+            <div className="cart-item" key={index}>
+              <span>{item.name}</span>
+              <span>₹{item.price.toLocaleString()}</span>
             </div>
+          ))
+        )}
 
-            {cart.length === 0 ? (
-              <p className="empty-state">Your cart is empty.</p>
-            ) : (
-              <div className="cart-items">
-                {cart.map((item, index) => (
-                  <div className="cart-item" key={`${item.id}-${index}`}>
-                    <span>{item.name}</span>
-                    <strong>₹{item.price}</strong>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            <div className="cart-total">
-              <span>Total</span>
-              <strong>₹{total}</strong>
-            </div>
-          </aside>
+        <div className="total">
+          Total: ₹{total.toLocaleString()}
         </div>
-      </main>
+      </div>
     </div>
   );
 }
