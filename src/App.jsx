@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import "./App.css";
 
 function App() {
@@ -17,13 +17,6 @@ function App() {
       description: "Sleek smartphone with long-lasting battery.",
       image: "https://cdn-icons-png.flaticon.com/512/15/15874.png",
     },
-    {
-      id: 3,
-      name: "Headphones",
-      price: 2000,
-      description: "Comfortable headphones for music and calls.",
-      image: "https://cdn-icons-png.flaticon.com/512/5977/5977590.png",
-    },
   ];
 
   const [cart, setCart] = useState([]);
@@ -35,64 +28,72 @@ function App() {
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
   return (
-    <div className="container">
-      <p className="tagline">Premium Shopping Experience</p>
-
-      <h1>Smart Tech Store</h1>
-
-      <p className="subtitle">
-        Discover curated electronics with a polished look, fast checkout,
-        and a professional product showcase.
-      </p>
-
-      <div className="features">
-        <span>🚚 Fast Delivery</span>
-        <span>🛡️ Trusted Quality</span>
-        <span>🔄 Easy Returns</span>
-      </div>
-
-      <h2 className="section-title">Featured Products</h2>
-
-      <div className="products">
-        {products.map((product) => (
-          <div className="card" key={product.id}>
-            <img src={product.image} alt={product.name} />
-
-            <h3>{product.name}</h3>
-
-            <p className="description">{product.description}</p>
-
-            <h2 className="price">
-              ₹{product.price.toLocaleString()}
-            </h2>
-
-            <button onClick={() => addToCart(product)}>
-              Add to Cart
-            </button>
-          </div>
-        ))}
-      </div>
-
-      <div className="cart">
-        <h2>🛒 Cart Summary</h2>
-
-        <p>{cart.length} Item(s)</p>
-
-        {cart.length === 0 ? (
-          <p>Your cart is empty.</p>
-        ) : (
-          cart.map((item, index) => (
-            <div className="cart-item" key={index}>
-              <span>{item.name}</span>
-              <span>₹{item.price.toLocaleString()}</span>
-            </div>
-          ))
-        )}
-
-        <div className="total">
-          Total: ₹{total.toLocaleString()}
+    <div className="app-shell">
+      <header className="hero">
+        <p className="tagline">Premium Shopping Experience</p>
+        <h1>Smart Tech Store</h1>
+        <p className="subtitle">
+          Discover curated electronics with a polished look, fast checkout, and a
+          modern shopping layout.
+        </p>
+        <div className="features">
+          <span>🚚 Fast Delivery</span>
+          <span>🛡️ Trusted Quality</span>
+          <span>🔄 Easy Returns</span>
         </div>
-      </div>
+      </header>
+
+      <main className="dashboard">
+        <section className="product-panel">
+          <div className="panel-header">
+            <h2>Featured Products</h2>
+            <p>Choose your favorite tech and add it to your cart.</p>
+          </div>
+
+          <div className="products">
+            {products.map((product) => (
+              <article className="card" key={product.id}>
+                <img src={product.image} alt={product.name} />
+                <div className="card-content">
+                  <h3>{product.name}</h3>
+                  <p className="description">{product.description}</p>
+                  <div className="price-block">
+                    <span className="price">₹{product.price.toLocaleString()}</span>
+                  </div>
+                  <button onClick={() => addToCart(product)}>
+                    Add to Cart
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <aside className="cart-panel">
+          <div className="panel-header">
+            <h2>Cart Summary</h2>
+            <p>{cart.length} item(s) selected</p>
+          </div>
+
+          {cart.length === 0 ? (
+            <p className="empty-state">Your cart is empty.</p>
+          ) : (
+            <div className="cart-items">
+              {cart.map((item, index) => (
+                <div className="cart-item" key={`${item.id}-${index}`}>
+                  <span>{item.name}</span>
+                  <span>₹{item.price.toLocaleString()}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div className="total">
+            <span>Total</span>
+            <strong>₹{total.toLocaleString()}</strong>
+          </div>
+        </aside>
+      </main>
     </div>
   );
 }
